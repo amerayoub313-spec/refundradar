@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getNotificationPreferences, updateNotificationPreferences } from '@/lib/services/database';
 import { NotificationPreferencesSchema } from '@/lib/validations';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const prefs = await getNotificationPreferences();
