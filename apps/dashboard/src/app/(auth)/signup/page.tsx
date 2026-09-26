@@ -90,13 +90,6 @@ function SignupFormContent() {
     }
   };
 
-  const handleChange = (field: keyof SignupInput, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-    if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: undefined }));
-    }
-  };
-
   return (
     <AuthLayout
       title="Create your account"
