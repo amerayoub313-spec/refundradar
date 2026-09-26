@@ -1,0 +1,31 @@
+project_id: "refundradar"
+
+# Database
+db:
+  major_version: 16
+
+# Auth
+auth:
+  site_url: "http://localhost:3000"
+  additional_redirect_urls:
+    - "http://localhost:3000/auth/callback"
+  email:
+    enable_signup: true
+    double_confirm_changes: true
+    secure_email_change: true
+
+# Storage (not used in MVP)
+storage:
+  enabled: false
+
+# Functions (for Edge Functions if needed)
+functions:
+  enabled: true
+
+# Realtime
+realtime:
+  enabled: true
+
+# Logs
+logs:
+  enabled: true

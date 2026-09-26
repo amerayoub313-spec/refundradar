@@ -1,0 +1,20 @@
+node_modules/
+build/
+dist/
+coverage/
+.turbo/
+.DS_Store
+*.log
+.env*
+!.env.example
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini

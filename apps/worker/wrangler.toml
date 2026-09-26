@@ -1,0 +1,40 @@
+name = "refundradar-worker"
+main = "src/index.ts"
+compatibility_date = "2024-01-15"
+compatibility_flags = ["nodejs_compat"]
+
+# Environment variables (set via wrangler secret put or dashboard)
+vars = { ENVIRONMENT = "development" }
+
+# Bindings
+[env]
+# Supabase
+DATABASE_URL = ""
+SUPABASE_URL = ""
+SUPABASE_SERVICE_ROLE_KEY = ""
+
+# Resend
+RESEND_API_KEY = ""
+
+# RevenueCat
+REVENUECAT_WEBHOOK_SECRET = ""
+
+# Encryption
+ENCRYPTION_KEY = ""
+
+# KV for rate limiting (optional)
+# RATE_LIMIT_KV = { binding = "RATE_LIMIT_KV" }
+
+# Durable Objects for future queue processing
+# [durable_objects]
+# bindings = []
+
+# [durable_objects.bindings]
+# name = "WEBHOOK_QUEUE"
+# class_name = "WebhookQueue"
+
+[[env.production.vars]]
+ENVIRONMENT = "production"
+
+[[env.staging.vars]]
+ENVIRONMENT = "staging"
