@@ -1,7 +1,6 @@
 'use client';
 
-export const dynamic = 'force-dynamic';
-
+import { Suspense } from 'react';
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -16,7 +15,7 @@ import { toast } from 'sonner';
 import { AuthLayout } from '@/components/layout/AuthLayout';
 import { signupSchema, type SignupInput } from '@/lib/validations';
 
-export default function SignupPage() {
+function SignupFormContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get('redirect') || '/dashboard';
@@ -88,6 +87,13 @@ export default function SignupPage() {
       console.error('Signup error:', err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleChange = (field: keyof SignupInput, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: undefined }));
     }
   };
 
@@ -252,4 +258,16 @@ export default function SignupPage() {
       </form>
     </AuthLayout>
   );
+}
+
+function SignupForm() {
+  return (
+    <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
+      <SignupFormContent />
+    </Suspense>
+  );
+}
+
+export default function SignupPage() {
+  return <SignupForm />;
 }

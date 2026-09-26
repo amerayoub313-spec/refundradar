@@ -1,7 +1,6 @@
 'use client';
 
-export const dynamic = 'force-dynamic';
-
+import { Suspense } from 'react';
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -16,7 +15,7 @@ import { toast } from 'sonner';
 import { AuthLayout } from '@/components/layout/AuthLayout';
 import { loginSchema, type LoginInput } from '@/lib/validations';
 
-export default function LoginPage() {
+function LoginFormContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get('redirect') || '/dashboard';
@@ -207,4 +206,16 @@ export default function LoginPage() {
       </form>
     </AuthLayout>
   );
+}
+
+function LoginForm() {
+  return (
+    <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
+      <LoginFormContent />
+    </Suspense>
+  );
+}
+
+export default function LoginPage() {
+  return <LoginForm />;
 }

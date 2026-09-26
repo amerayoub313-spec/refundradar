@@ -1,7 +1,6 @@
 'use client';
 
-export const dynamic = 'force-dynamic';
-
+import { Suspense } from 'react';
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -16,7 +15,7 @@ import { toast } from 'sonner';
 import { AuthLayout } from '@/components/layout/AuthLayout';
 import { forgotPasswordSchema, type ForgotPasswordInput } from '@/lib/validations';
 
-export default function ForgotPasswordPage() {
+function ForgotPasswordFormContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get('redirect') || '/dashboard';
@@ -125,4 +124,16 @@ export default function ForgotPasswordPage() {
       </form>
     </AuthLayout>
   );
+}
+
+function ForgotPasswordForm() {
+  return (
+    <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
+      <ForgotPasswordFormContent />
+    </Suspense>
+  );
+}
+
+export default function ForgotPasswordPage() {
+  return <ForgotPasswordForm />;
 }
